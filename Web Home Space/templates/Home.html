@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        table{
+            table-layout: fixed; width: 100%;
+        }
+        table td,th{
+            word-wrap: break-word;
+        }
+        th{
+            text-align: left;
+        }
+    </style>
+    <title>Home Space</title>
+</head>
+<body>
+    <h2 style="text-align: center; margin-bottom: 100px;">Welcome To Your Home Space</h2>
+    <form method="post">
+        <a href="/" style="margin-left: 1100px; margin-top: -600px;"><i class="bi bi-power" style="font-size: 2rem;"></i></a><br>
+        <button formaction="/files" class="my-button" style="margin-bottom: 60px;">Files</button>
+        <label style="margin-right: 50px; color: blue; font-size: 20px; font-weight: bold; border-color: blue; margin-left: 20px;">{{value1}}</label>
+        <button formaction="/dirs" class="my-button">Dirs</button>
+        <label style="margin-right: 50px; color:blue; font-size: 20px; font-weight: bold; border-color: blue; margin-left: 20px;">{{value2}}</label>
+        <button formaction="/space" class="my-button">Space</button>
+        <label style="color:blue; font-size: 20px; font-weight: bold; border-color: blue; margin-left: 20px;">{{value3}}</label>
+        <br>
+        <input type="text" name="keyword" style="height: 20px; border-radius: 10px; margin-right: 20px;">
+        <button formaction="/search" style="padding: 7px 16px; font-size: 15px; background-color: orange; border-radius: 15px; color: aliceblue; margin-right: 515px; margin-bottom: 15px;">Search</button>
+        <a href="/download_home_directory"><i class="bi bi-download" style="font-size: 2rem;"></i></a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Modified Time</th>
+                    <th>Size</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                    <a href="{{parentPath}}">
+                        <span>Parent Folder </span>
+                    </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                {% for fileObj in val %}
+                <tr>
+                    <td>
+                    <a href="{{fileObj['fLink']}}">
+                        <span><i class="{{fileObj['fIcone']}}" style="margin-right: 0.3em;"></i>{{fileObj['name']}}  </span>
+                    </a>
+                    </td>
+                    <td>{{fileObj['mTime']}}  </td>
+                    <td>{{fileObj['size']}}  </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+    </form>
+</body>
+</html>
